@@ -28,7 +28,7 @@ class ListNoteActivity : AppCompatActivity() {
     ) { result ->
         when (result.resultCode) {
             FormNoteViewModel.RESULT_NOTE_DB_CHANGED -> {
-                viewModel.getNotes(this)
+                viewModel.getNotes()
             }
         }
     }
@@ -45,7 +45,8 @@ class ListNoteActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getNotes(this)
+        viewModel.getDaoInstance(this)
+        viewModel.getNotes()
     }
 
     private fun setListeners() {
@@ -79,7 +80,7 @@ class ListNoteActivity : AppCompatActivity() {
 
             override fun onLongClickListener(position: Int) {
                 Utils.showDialogAlert(this@ListNoteActivity) {
-                    viewModel.removeNote(this@ListNoteActivity, mainAdapter.items[position])
+                    viewModel.removeNote(mainAdapter.items[position])
                     mainAdapter.removeItem(position)
                 }
             }

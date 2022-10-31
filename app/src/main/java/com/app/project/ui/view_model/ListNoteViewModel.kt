@@ -11,20 +11,21 @@ import kotlinx.coroutines.launch
 
 class ListNoteViewModel : ViewModel() {
 
+    private lateinit var dao: NoteDb
+
     private val _uiResultEvent = MutableLiveData<List<NoteEntity>>()
     val uiResultEvent: LiveData<List<NoteEntity>>
         get() = _uiResultEvent
 
-    fun getNotes(context: Context) = viewModelScope.launch {
-        NoteDb.getInstance(context).apply {
-            val result = noteDao().get() ?: emptyList()
-            _uiResultEvent.postValue(result)
-        }
+    fun getDaoInstance(context: Context) = viewModelScope.launch {
+        if (!this@ListNoteViewModel::dao.isInitialized) dao = NoteDb.getInstance(context)
     }
 
-    fun removeNote(context: Context, note: NoteEntity) = viewModelScope.launch {
-        NoteDb.getInstance(context).apply {
-            noteDao().delete(note)
-        }
+    fun getNotes() = viewModelScope.launch {
+        _uiResultEvent.postValue(dao.noteDao().get() ?: emptyList())
+    }
+
+    fun removeNote(note: NoteEntity) = viewModelScope.launch {
+        dao.noteDao().delete(note)
     }
 }

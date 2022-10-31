@@ -11,22 +11,28 @@ import kotlinx.coroutines.launch
 
 class FormNoteViewModel : ViewModel() {
 
+    private lateinit var dao: NoteDb
+
     private val _uiInteractionEvent = MutableSharedFlow<Int>()
     val uiInteractionEvent: SharedFlow<Int>
         get() = _uiInteractionEvent
 
-    fun addNote(context: Context, note: NoteEntity) = viewModelScope.launch {
-        NoteDb.getInstance(context).apply { noteDao().insert(note) }
+    fun getDaoInstance(context: Context) = viewModelScope.launch {
+        if (!this@FormNoteViewModel::dao.isInitialized) dao = NoteDb.getInstance(context)
+    }
+
+    fun addNote(note: NoteEntity) = viewModelScope.launch {
+        dao.noteDao().insert(note)
         _uiInteractionEvent.emit(RESULT_NOTE_DB_CHANGED)
     }
 
-    fun editNote(context: Context, note: NoteEntity) = viewModelScope.launch {
-        NoteDb.getInstance(context).apply { noteDao().update(note) }
+    fun editNote(note: NoteEntity) = viewModelScope.launch {
+        dao.noteDao().update(note)
         _uiInteractionEvent.emit(RESULT_NOTE_DB_CHANGED)
     }
 
-    fun excludeNote(context: Context, note: NoteEntity) = viewModelScope.launch {
-        NoteDb.getInstance(context).apply { noteDao().delete(note) }
+    fun excludeNote(note: NoteEntity) = viewModelScope.launch {
+        dao.noteDao().delete(note)
         _uiInteractionEvent.emit(RESULT_NOTE_DB_CHANGED)
     }
 

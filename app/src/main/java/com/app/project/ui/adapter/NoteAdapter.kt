@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.app.project.feature.data_source.NoteEntity
 import com.app.project.databinding.ItemNoteBinding
+import com.app.project.utils.Utils
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
@@ -35,7 +36,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         fun bind(note: NoteEntity) {
             binding.itemNoteTitle.text = note.title
             binding.itemNoteDescription.text = note.description
-            binding.itemNoteDate.text = note.update
+            binding.itemNoteDate.text = Utils.formatDateToNationality(note.update)
 
             binding.root.setOnClickListener {
                 itemClickListener.onClickListener(adapterPosition)

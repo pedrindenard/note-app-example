@@ -34,6 +34,11 @@ class FormNoteActivity : AppCompatActivity() {
         setObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getDaoInstance(this)
+    }
+
     private fun setListeners() {
         binding.activityFormNoteDelete.setOnClickListener {
             excludeNote()
@@ -100,14 +105,16 @@ class FormNoteActivity : AppCompatActivity() {
         intent.note = noteEntity
 
         when (intent.interaction) {
-            Interaction.ADD_NOTE -> viewModel.addNote(this, noteEntity)
-            Interaction.EDIT_NOTE -> viewModel.editNote(this, noteEntity)
+            Interaction.ADD_NOTE -> viewModel.addNote(noteEntity)
+            Interaction.EDIT_NOTE -> viewModel.editNote(noteEntity)
         }
     }
 
     private fun excludeNote() {
         if (intent.interaction == Interaction.EDIT_NOTE && intent.note != null) {
-            viewModel.excludeNote(this, intent.note!!)
+            Utils.showDialogAlert(this) {
+                viewModel.excludeNote(intent.note!!)
+            }
         }
     }
 }

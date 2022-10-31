@@ -10,6 +10,7 @@ import com.app.project.R
 import com.app.project.feature.data_source.NoteEntity
 import com.app.project.feature.enums.Interaction
 import java.io.Serializable
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,6 +33,12 @@ object Utils {
         val time = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         return formatter.format(time)
+    }
+
+    fun formatDateToNationality(currentDate: String): String {
+        val formatter: DateFormat = SimpleDateFormat("yyyy-MM-DD", Locale.ROOT)
+        val date = formatter.parse(currentDate) as Date
+        return DateFormat.getDateInstance(DateFormat.LONG).format(date)
     }
 
     fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
