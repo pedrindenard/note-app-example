@@ -1,4 +1,4 @@
-package com.app.project.enums
+package com.app.project.feature.enums
 
 enum class Interaction {
     ADD_NOTE,

@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.project.adapter.NoteAdapter
+import com.app.project.ui.adapter.NoteAdapter
 import com.app.project.databinding.ActivityListNoteBinding
-import com.app.project.enums.Interaction
+import com.app.project.feature.enums.Interaction
 import com.app.project.utils.Utils.interaction
 import com.app.project.ui.view_model.FormNoteViewModel
 import com.app.project.ui.view_model.ListNoteViewModel

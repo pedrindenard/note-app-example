@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.project.R
-import com.app.project.data_source.NoteEntity
+import com.app.project.feature.data_source.NoteEntity
 import com.app.project.databinding.ActivityFormNoteBinding
-import com.app.project.enums.Interaction
+import com.app.project.feature.enums.Interaction
 import com.app.project.utils.Utils
 import com.app.project.utils.Utils.interaction
 import com.app.project.utils.Utils.note

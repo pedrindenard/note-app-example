@@ -1,11 +1,11 @@
-package com.app.project.adapter
+package com.app.project.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.app.project.data_source.NoteEntity
+import com.app.project.feature.data_source.NoteEntity
 import com.app.project.databinding.ItemNoteBinding
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {

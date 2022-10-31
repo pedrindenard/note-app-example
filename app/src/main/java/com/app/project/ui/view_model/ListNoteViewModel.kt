@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.project.data_source.NoteDb
-import com.app.project.data_source.NoteEntity
+import com.app.project.feature.data_source.NoteDb
+import com.app.project.feature.data_source.NoteEntity
 import kotlinx.coroutines.launch
 
 class ListNoteViewModel : ViewModel() {

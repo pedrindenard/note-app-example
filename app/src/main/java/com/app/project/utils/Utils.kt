@@ -7,8 +7,8 @@ import android.content.Intent
 import android.text.Editable
 import androidx.core.content.ContextCompat
 import com.app.project.R
-import com.app.project.data_source.NoteEntity
-import com.app.project.enums.Interaction
+import com.app.project.feature.data_source.NoteEntity
+import com.app.project.feature.enums.Interaction
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*

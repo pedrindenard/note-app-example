@@ -3,8 +3,8 @@ package com.app.project.ui.view_model
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.project.data_source.NoteDb
-import com.app.project.data_source.NoteEntity
+import com.app.project.feature.data_source.NoteDb
+import com.app.project.feature.data_source.NoteEntity
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch

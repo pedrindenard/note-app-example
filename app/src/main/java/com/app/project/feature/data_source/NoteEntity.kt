@@ -1,4 +1,4 @@
-package com.app.project.data_source
+package com.app.project.feature.data_source
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
