@@ -3,10 +3,9 @@ package com.app.project.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.app.project.feature.data_source.NoteEntity
 import com.app.project.databinding.ItemNoteBinding
+import com.app.project.feature.data_source.NoteEntity
 import com.app.project.utils.Utils
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -14,8 +13,6 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     val items = arrayListOf<NoteEntity>()
 
     private lateinit var itemClickListener: ItemClickListener
-
-    private var removeIsEnable = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder =
         NoteViewHolder(
@@ -46,8 +43,6 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
                 itemClickListener.onLongClickListener(adapterPosition)
                 false
             }
-
-            binding.appCompatImageView.isVisible = removeIsEnable
         }
     }
 
