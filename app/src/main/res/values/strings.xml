@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Project</string>
+
+    <string name="activity_form_note_hint_title">Title</string>
+    <string name="activity_form_note_hint_description">Type something…</string>
+    <string name="activity_form_note_edit">To edit</string>
+    <string name="activity_form_note_new">New</string>
+    <string name="activity_form_note_old">Note</string>
+
+    <string name="activity_list_note_empty">Notes not found</string>
+
+    <string name="msg_title_epy">Title must not be empty.</string>
+    <string name="msg_desc_epy">Description must not be empty.</string>
+
+    <string name="msg_exclude">After deleting this note, it will not be possible to recover it.</string>
+    <string name="msg_cancel">Cancel</string>
+    <string name="msg_confirm">OK</string>
+</resources>

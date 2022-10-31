@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="color_primary">#606060</color>
+    <color name="color_primary_variant">#707070</color>
+    <color name="color_on_primary">#A8A8A8</color>
+
+    <color name="app_icon_color">#FFFFFFFF</color>
+    <color name="app_title_color">#FFFFFFFF</color>
+
+    <color name="note_gray">#606060</color>
+    <color name="note_red">#FF8A80</color>
+    <color name="note_green">#CCFF90</color>
+
+    <color name="button_yellow">#FFD600</color>
+</resources>
