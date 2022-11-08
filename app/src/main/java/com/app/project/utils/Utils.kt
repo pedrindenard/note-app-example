@@ -8,6 +8,7 @@ import android.text.Editable
 import androidx.core.content.ContextCompat
 import com.app.project.R
 import com.app.project.feature.data_source.NoteEntity
+import com.app.project.feature.enums.Color
 import com.app.project.feature.enums.Interaction
 import java.io.Serializable
 import java.text.DateFormat
@@ -15,6 +16,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
+
+    private const val RED = "red"
+    private const val GREEN = "green"
+    private const val YELLOW = "yellow"
 
     var Intent.interaction: Interaction
         get() = getSerializableExtra("interaction") as Interaction
@@ -70,6 +75,15 @@ object Utils {
                 setTextColor(red)
                 isAllCaps = false
             }
+        }
+    }
+
+    fun getNoteColor(color: String): Color {
+        return when (color) {
+            RED -> Color.RED
+            GREEN -> Color.GREEN
+            YELLOW -> Color.YELLOW
+            else -> Color.NONE
         }
     }
 }

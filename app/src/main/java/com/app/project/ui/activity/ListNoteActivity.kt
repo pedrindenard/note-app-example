@@ -59,8 +59,8 @@ class ListNoteActivity : AppCompatActivity() {
 
     private fun setObservers() {
         viewModel.uiResultEvent.observe(this) { notes ->
-            binding.activityListNoteEmpty.root.isVisible = notes.isEmpty()
             mainAdapter.insertItems(notes)
+            checkForEmptyMessage()
         }
     }
 
@@ -82,8 +82,13 @@ class ListNoteActivity : AppCompatActivity() {
                 Utils.showDialogAlert(this@ListNoteActivity) {
                     viewModel.removeNote(mainAdapter.items[position])
                     mainAdapter.removeItem(position)
+                    checkForEmptyMessage()
                 }
             }
         })
+    }
+
+    private fun checkForEmptyMessage() {
+        binding.activityListNoteEmpty.root.isVisible = mainAdapter.items.isEmpty()
     }
 }

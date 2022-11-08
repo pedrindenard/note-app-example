@@ -11,7 +11,13 @@
 
     <string name="msg_title_epy">Título não pode ser vazio.</string>
     <string name="msg_desc_epy">Descrição não pode ser vazio.</string>
+
     <string name="msg_exclude">Após excluir essa nota, não será possível recupera-la.</string>
     <string name="msg_cancel">Cancelar</string>
     <string name="msg_confirm">OK</string>
+
+    <string name="note_color_red">Vermelho</string>
+    <string name="note_color_green">Verde</string>
+    <string name="note_color_yellow">Amarelo</string>
+    <string name="note_color_none">Nenhuma</string>
 </resources>

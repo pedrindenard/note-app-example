@@ -18,5 +18,9 @@ data class NoteEntity(
     val description: String,
 
     @ColumnInfo(name = "update")
-    val update: String
+    val update: String,
+
+    @ColumnInfo(name = "color")
+    val color: String
+
 ) : Serializable

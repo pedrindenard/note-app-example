@@ -3,9 +3,12 @@ package com.app.project.ui.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.app.project.R
 import com.app.project.databinding.ItemNoteBinding
 import com.app.project.feature.data_source.NoteEntity
+import com.app.project.feature.enums.Color
 import com.app.project.utils.Utils
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -34,6 +37,17 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             binding.itemNoteTitle.text = note.title
             binding.itemNoteDescription.text = note.description
             binding.itemNoteDate.text = Utils.formatDateToNationality(note.update)
+
+            binding.itemNoteColor.setColorFilter(
+                ContextCompat.getColor(
+                    binding.root.context, when (Utils.getNoteColor(note.color)) {
+                        Color.RED -> R.color.note_red
+                        Color.GREEN -> R.color.note_green
+                        Color.YELLOW -> R.color.button_yellow
+                        Color.NONE -> R.color.note_gray
+                    }
+                )
+            )
 
             binding.root.setOnClickListener {
                 itemClickListener.onClickListener(adapterPosition)

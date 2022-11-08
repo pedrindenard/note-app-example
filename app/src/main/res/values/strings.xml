@@ -15,4 +15,9 @@
     <string name="msg_exclude">After deleting this note, it will not be possible to recover it.</string>
     <string name="msg_cancel">Cancel</string>
     <string name="msg_confirm">OK</string>
+
+    <string name="note_color_red">Red</string>
+    <string name="note_color_green">Green</string>
+    <string name="note_color_yellow">Yellow</string>
+    <string name="note_color_none">None</string>
 </resources>

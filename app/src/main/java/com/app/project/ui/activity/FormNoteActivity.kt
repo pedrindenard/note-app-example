@@ -4,25 +4,29 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.project.R
-import com.app.project.feature.data_source.NoteEntity
 import com.app.project.databinding.ActivityFormNoteBinding
+import com.app.project.feature.data_source.NoteEntity
+import com.app.project.feature.enums.Color
 import com.app.project.feature.enums.Interaction
+import com.app.project.ui.dialog.ColorDialog
+import com.app.project.ui.view_model.FormNoteViewModel
 import com.app.project.utils.Utils
 import com.app.project.utils.Utils.interaction
 import com.app.project.utils.Utils.note
 import com.app.project.utils.Utils.toEditable
-import com.app.project.ui.view_model.FormNoteViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 class FormNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormNoteBinding
     private lateinit var viewModel: FormNoteViewModel
+    private var color: Color = Color.NONE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +36,7 @@ class FormNoteActivity : AppCompatActivity() {
         setViewModel()
         setListeners()
         setObservers()
+        getColor()
     }
 
     override fun onResume() {
@@ -42,6 +47,10 @@ class FormNoteActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.activityFormNoteDelete.setOnClickListener {
             excludeNote()
+        }
+
+        binding.activityFormNoteColor.setOnClickListener {
+            showDialogColor()
         }
 
         binding.activityFormNoteCheck.setOnClickListener {
@@ -62,8 +71,22 @@ class FormNoteActivity : AppCompatActivity() {
         binding.activityFormNoteDescription.text = intent.note?.description?.toEditable()
 
         when (intent.interaction) {
-            Interaction.ADD_NOTE -> binding.activityFormNoteDelete.visibility = View.GONE
-            Interaction.EDIT_NOTE -> binding.activityFormNoteDelete.visibility = View.VISIBLE
+            Interaction.ADD_NOTE -> {
+                binding.activityFormNoteMenu.text = getString(R.string.activity_form_note_new)
+                binding.activityFormNoteDelete.visibility = View.GONE
+            }
+            Interaction.EDIT_NOTE -> {
+                binding.activityFormNoteMenu.text = getString(R.string.activity_form_note_edit)
+                binding.activityFormNoteDelete.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun getColor() {
+        val enum = intent.note?.color
+        if (enum != null) {
+            setButtonColor(Utils.getNoteColor(enum))
+            color = Utils.getNoteColor(enum)
         }
     }
 
@@ -99,9 +122,10 @@ class FormNoteActivity : AppCompatActivity() {
         val title = binding.activityFormNoteTitle.text.toString()
         val description = binding.activityFormNoteDescription.text.toString()
         val currentDate = Utils.getCalendarDate()
+        val color = color.toString().lowercase()
         val id = intent.note?.id ?: 0
 
-        val noteEntity = NoteEntity(id, title, description, currentDate)
+        val noteEntity = NoteEntity(id, title, description, currentDate, color)
         intent.note = noteEntity
 
         when (intent.interaction) {
@@ -116,5 +140,29 @@ class FormNoteActivity : AppCompatActivity() {
                 viewModel.excludeNote(intent.note!!)
             }
         }
+    }
+
+    private fun showDialogColor() {
+        val dialog = ColorDialog(color)
+        dialog.show(supportFragmentManager, "")
+        dialog.setMenuClickListener(object : ColorDialog.MenuClickListener {
+            override fun onClick(value: Color) {
+                setButtonColor(value)
+                color = value
+            }
+        })
+    }
+
+    private fun setButtonColor(value: Color) {
+        binding.activityFormNoteColor.setColorFilter(
+            ContextCompat.getColor(
+                binding.root.context, when (value) {
+                    Color.RED -> R.color.note_red
+                    Color.GREEN -> R.color.note_green
+                    Color.YELLOW -> R.color.button_yellow
+                    Color.NONE -> R.color.note_gray
+                }
+            )
+        )
     }
 }
